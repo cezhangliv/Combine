@@ -1,0 +1,37 @@
+#Simple datacard for MUonE shape analysis. Template fit for TRLumi: 1 free parameter for the hadronic running (K)
+
+imax    1 number of bins #(i.e. number of channels. For us, this means only mu-e elastic scattering)
+jmax    0 number of backgrounds #(i.e. pair production, for us). We don't have any background now.
+kmax    * number of nuisance parameters # '*' means that "all the nuisance parameters listed below"
+--------------------------------------------------------------------------------
+#shapes indicates that we are performing a shape analysis.
+#              input file containing histos     nominal templates                  templates with systematics shifted by +/-1sigma
+
+shapes    *   *   ./toy_data_$NTOY.root     signal_templates/$PROCESS      signal_templates_systematic/$PROCESS_$SYSTEMATIC
+
+--------------------------------------------------------------------------------
+#observation/rate = -1: the total number of events is calculated by combine by doing histogram->Integral()
+
+bin          signal_template$iK
+observation  -1
+
+--------------------------------------------------------------------------------
+
+bin                                  signal_template$iK
+process                              muemue_template$iK
+process                                    0
+rate                                      -1
+
+--------------------------------------------------------------------------------
+
+#normalization nuisance. Modeled to follow a log-normal (lnN) distribution
+#name               modelization    expected systematic effect (1+Dx/x)
+provalnN_error          lnN             1.01
+
+
+#shape nuisance paramters
+#name               modelization       histograms provided correspond to 1sigma shift
+MultipleScattering     shape              1
+###SingleHitRes           shape              1 
+###Ebeam                  shape              1
+
