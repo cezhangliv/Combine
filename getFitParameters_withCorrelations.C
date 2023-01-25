@@ -44,7 +44,8 @@ TGraphErrors *g_MultipleScatteringNuisance; TCanvas *c_MultipleScatteringNuisanc
 //TGraphErrors *g_EbeamNuisance; TCanvas *c_EbeamNuisance;
 
 //Reference values for the input parameters
-Double_t Kref   = 0.13726; Double_t dKu    = 0.045;
+//Double_t Kref   = 0.13726; Double_t dKu    = 0.045;
+Double_t Kref   = 0.13724; Double_t dKu    = 0.045;
 Double_t Mref   = 0.0525;  Double_t dMu    = 0.;
 //range and step for the parameters grid (they depend on the specific job settings)
 Int_t sigmaLim  = 5, sigmaStep = 4;
@@ -56,7 +57,7 @@ Int_t ngrid = sigmaLim*sigmaStep*2 + 1;
 //Double_t offset = 150;
 
 Double_t oneSigma_MS    =  1.0;//************************** CHANGE THIS VALUE ACCORDING TO THE +/-1sigma SHIFT USED FOR THE MULTIPLE SCATTERING MODELIZATION
-Double_t offset_MS      =  0.6;//************************** CHANGE THIS VALUE ACCORDING TO THE NOMINAL MODELIZATION OF MULTIPLE SCATTERING EFFECTS
+Double_t offset_MS      =  0.0;//0.6;//************************** CHANGE THIS VALUE ACCORDING TO THE NOMINAL MODELIZATION OF MULTIPLE SCATTERING EFFECTS
 //Double_t oneSigma_Intr  =  1.0;
 //Double_t oneSigma_Ebeam =  20.;
 //Double_t offset_Intr    =  5.0;
