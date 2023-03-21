@@ -113,7 +113,8 @@ void HistosForCombine2D_mappedIntoTH1(int NTOY, TString angular_cuts) {
 	//*****************   CHANGE dirData WITH THE DIRECTORY CONTAINING YOUR PSEUDODATA
 	//TString dirData = mainDir + "job_Ebeam150.006GeV_xX00.042925_IntrRes0.021_pseudodata/MuE/" + fileLocation;
 	// true
-	TString dirData = mainDir + "test_mesmer_MuE_23-01-25_11:51:40/MuE" + fileLocation;
+	TString dirData = //mainDir + "test_mesmer_MuE_23-01-25_11:51:40/MuE" + fileLocation;
+	"/user/cezhang/scratch/MUonE/TemplateResult/results_0.042925.root";
 	// deviated para
 	//TString dirData = mainDir + "test_mesmer_MuE_23-01-13_15:00:04/MuE" + fileLocation;
 	
@@ -127,19 +128,22 @@ void HistosForCombine2D_mappedIntoTH1(int NTOY, TString angular_cuts) {
 
 	//******************   CHANGE dirTemplate WITH THE DIRECTORY CONTAINING YOUR TEMPLATES GENERATED WITH THE NOMINAL DETECTOR MODELIZATION
 	//TString dirTemplate    = mainDir + range_folder + "job_nominalTemplNEW_Ebeam150.000_xX00.043010_IntrRes0.021/MuE/" + fileLocation;
-	TString dirTemplate    = mainDir + "test_mesmer_MuE_23-01-25_11:51:40/MuE" + fileLocation;
+	TString dirTemplate    = //mainDir + "test_mesmer_MuE_23-01-25_11:51:40/MuE" + fileLocation;
+	"/user/cezhang/scratch/MUonE/TemplateResult/results_0.0425.root";
 	TFile *infileTemplate = new TFile(dirTemplate);
 	if(infileTemplate->IsOpen()) cout<<"input file templates opened successfully"<<endl;
 	else { cout<<"where is the input file?"<<endl; return ; }
 
 	//******************   CHANGE dirMSUp WITH THE DIRECTORY CONTAINING YOUR TEMPLATES GENERATED WITH THE MULTIPLE SCATTERING MODELIZATION SHIFTED BY +1sigma
-	TString dirMSUp        = mainDir + "test_mesmer_MuE_23-01-25_10:33:52/MuE" + fileLocation;//mainDir + range_folder + "job_MSUpTemplNEWNEWNEW_Ebeam150.000_xX00.0438702_IntrRes0.021/MuE/" + fileLocation;//templates with MS+1%
+	TString dirMSUp        = //mainDir + "test_mesmer_MuE_23-01-25_10:33:52/MuE" + fileLocation;//mainDir + range_folder + "job_MSUpTemplNEWNEWNEW_Ebeam150.000_xX00.0438702_IntrRes0.021/MuE/" + fileLocation;//templates with MS+1%
+	"/user/cezhang/scratch/MUonE/TemplateResult/results_0.04335.root";
 	TFile *infileMSUp = new TFile(dirMSUp);
 	if(infileMSUp->IsOpen()) cout<<"input file MSUP opened successfully"<<endl;
 	else { cout<<"where is the input file?"<<endl; return ; }
 
 	//******************   CHANGE dirMSDown WITH THE DIRECTORY CONTAINING YOUR TEMPLATES GENERATED WITH THE MULTIPLE SCATTERING MODELIZATION SHIFTED BY -1sigma
-	TString dirMSDown      = mainDir + "test_mesmer_MuE_23-01-25_11:48:47/MuE" + fileLocation;//mainDir + range_folder + "job_MSDownTemplNEWNEWNEW_Ebeam150.000_xX00.0421498_IntrRes0.021/MuE/" + fileLocation;//templates with MS-1%
+	TString dirMSDown      = //mainDir + "test_mesmer_MuE_23-01-25_11:48:47/MuE" + fileLocation;//mainDir + range_folder + "job_MSDownTemplNEWNEWNEW_Ebeam150.000_xX00.0421498_IntrRes0.021/MuE/" + fileLocation;//templates with MS-1%
+	"/user/cezhang/scratch/MUonE/TemplateResult/results_0.04165.root";
 	TFile *infileMSDown = new TFile(dirMSDown);
 	if(infileMSDown->IsOpen()) cout<<"input file MSDOWN opened successfully"<<endl;
 	else { cout<<"where is the input file?"<<endl; return ; }

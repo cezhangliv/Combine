@@ -56,7 +56,7 @@ Int_t ngrid = sigmaLim*sigmaStep*2 + 1;
 //Int_t nSteps = (ending_Ebeam - starting_Ebeam)/step_Ebeam + 1;
 //Double_t offset = 150;
 
-Double_t oneSigma_MS    =  1.0;//************************** CHANGE THIS VALUE ACCORDING TO THE +/-1sigma SHIFT USED FOR THE MULTIPLE SCATTERING MODELIZATION
+Double_t oneSigma_MS    =  2.0;//************************** CHANGE THIS VALUE ACCORDING TO THE +/-1sigma SHIFT USED FOR THE MULTIPLE SCATTERING MODELIZATION
 Double_t offset_MS      =  0.0;//0.6;//************************** CHANGE THIS VALUE ACCORDING TO THE NOMINAL MODELIZATION OF MULTIPLE SCATTERING EFFECTS
 //Double_t oneSigma_Intr  =  1.0;
 //Double_t oneSigma_Ebeam =  20.;

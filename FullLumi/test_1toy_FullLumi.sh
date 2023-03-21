@@ -17,7 +17,8 @@ CUTS=$2  #thmu%1.1f_the%1.0f
 SEED_TOY=$3
 
 #*************   TO CHANGE WITH YOUR FINAL DIR   *************
-FINAL_DIR=/afs/cern.ch/user/r/rpilato/CMSSW_10_2_13/src/MUonE/FINAL_THESIS/PostGraziano_2022-10-13/ULTIMO_FIT/fit2_K_MS1_Intr1_Ebeam20MeV/
+FINAL_DIR=/user/cezhang/bundle/MUonE/cedirc/Systematics/
+#/afs/cern.ch/user/r/rpilato/CMSSW_10_2_13/src/MUonE/FINAL_THESIS/PostGraziano_2022-10-13/ULTIMO_FIT/fit2_K_MS1_Intr1_Ebeam20MeV/
 
 
 #list of nuisance parameters (see the datacard for the names)
@@ -25,17 +26,17 @@ FINAL_DIR=/afs/cern.ch/user/r/rpilato/CMSSW_10_2_13/src/MUonE/FINAL_THESIS/PostG
 NUISANCE_PARS="provalnN_error,MultipleScattering"
 
 
-echo "Setting the CMSSW environment..."
-CURRENT_DIR=$PWD
-ulimit -s unlimited
-set -e
-cd /afs/cern.ch/user/r/rpilato/CMSSW_10_2_13/src
-export SCRAM_ARCH=slc7_amd64_gcc700
-source /cvmfs/cms.cern.ch/cmsset_default.sh
-eval `scramv1 runtime -sh`
+#echo "Setting the CMSSW environment..."
+#CURRENT_DIR=$PWD
+#ulimit -s unlimited
+#set -e
+#cd /afs/cern.ch/user/r/rpilato/CMSSW_10_2_13/src
+#export SCRAM_ARCH=slc7_amd64_gcc700
+#source /cvmfs/cms.cern.ch/cmsset_default.sh
+#eval `scramv1 runtime -sh`
 
-cd $CURRENT_DIR
-pwd
+#cd $CURRENT_DIR
+#pwd
 
 
 #create directory to store the file with the best fit values created by combine

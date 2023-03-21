@@ -18,7 +18,8 @@ SEED_TOY=$3
 
 #*************   TO CHANGE WITH YOUR FINAL DIR   *************
 #FINAL_DIR=/afs/cern.ch/user/r/rpilato/CMSSW_10_2_13/src/MUonE/FINAL_THESIS/PostGraziano_2022-10-13/ULTIMO_FIT/fit2_K_MS1_Intr1_Ebeam20MeV/
-FINAL_DIR=/bundle/scratch/30day/cezhang/MUonE/Combine
+FINAL_DIR=/user/cezhang/bundle/MUonE/cedirc/Systematics
+#/bundle/scratch/30day/cezhang/MUonE/Combine
 
 
 #list of nuisance parameters (see the datacard for the names)
