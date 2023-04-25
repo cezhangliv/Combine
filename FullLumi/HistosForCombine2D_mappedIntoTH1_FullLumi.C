@@ -99,7 +99,8 @@ void HistosForCombine2D_mappedIntoTH1_FullLumi(int NTOY, TString angular_cuts) {
 	Int_t ngrid     = sigmaLim*sigmaStep*2 + 1;
 	
 	//set the requested luminosity
-	Double_t FullLumi = 1.5e10;//ub-1
+	//Double_t FullLumi = 1.5e10;//ub-1
+	Double_t FullLumi = 5e8;//ub-1, test 19Apr23
 
 
 
@@ -110,7 +111,8 @@ void HistosForCombine2D_mappedIntoTH1_FullLumi(int NTOY, TString angular_cuts) {
 	
 	//*****************   CHANGE dirData WITH THE DIRECTORY CONTAINING YOUR PSEUDODATA
 	TString dirData = //mainDir + "job_xX00.04335_IntrRes0.02mrad/" + fileLocation;
-	"/user/cezhang/bundle/MUonE/cedirc/Systematics/7Mar23_CombineThicknessScan/test_mesmer_MuE_nev_25000000_thickness_0.042925_LowLumi_0_divSigma_4.root";
+	"/user/cezhang/bundle/MUonE/cedirc/Systematics/test_mesmer_MuE_nev_25000000_thickness_0.042925_LowLumi_0_divSigma_4.root";
+	//"/user/cezhang/bundle/MUonE/cedirc/Systematics/test_mesmer_MuE_nev_25000000_thickness_0.042925_LowLumi_0_divSigma_4.root";
 	TFile *infileData = new TFile(dirData);
 	if(infileData->IsOpen()) cout<<"input file opened successfully"<<endl;
 	else { cout<<"where is the input file?"<<endl; return ; }
@@ -118,21 +120,26 @@ void HistosForCombine2D_mappedIntoTH1_FullLumi(int NTOY, TString angular_cuts) {
 
 	//******************   CHANGE dirTemplate WITH THE DIRECTORY CONTAINING YOUR TEMPLATES GENERATED WITH THE NOMINAL DETECTOR MODELIZATION
 	TString dirTemplate    = //mainDir + "job_xX00.0425_IntrRes0.02mrad/" + fileLocation;
-	"/user/cezhang/bundle/MUonE/cedirc/Systematics/7Mar23_CombineThicknessScan/test_mesmer_MuE_nev_25000000_thickness_0.0425_LowLumi_0_divSigma_4.root";
+	//"/user/cezhang/bundle/MUonE/cedirc/Systematics/test_mesmer_MuE_nev_25000000_thickness_0.0425_LowLumi_0_divSigma_4.root";
+	"/user/cezhang/bundle/MUonE/cedirc/Systematics/test_mesmer_MuE_nev_25000000_thickness_0.04292925_LowLumi_0_divSigma_4.root";
+	// 0.0425*1.01=0.042925
 	TFile *infileTemplate = new TFile(dirTemplate);
 	if(infileTemplate->IsOpen()) cout<<"input file templates opened successfully"<<endl;
 	else { cout<<"where is the input file?"<<endl; return ; }
 
 	//******************   CHANGE dirMSUp WITH THE DIRECTORY CONTAINING YOUR TEMPLATES GENERATED WITH THE MULTIPLE SCATTERING MODELIZATION SHIFTED BY +1sigma
 	TString dirMSUp        = //mainDir + "job_xX00.04335_IntrRes0.02mrad/" + fileLocation;//templates with MS+1%
-	"/user/cezhang/bundle/MUonE/cedirc/Systematics/7Mar23_CombineThicknessScan/test_mesmer_MuE_nev_25000000_thickness_0.04335_LowLumi_0_divSigma_4.root";
+	//"/user/cezhang/bundle/MUonE/cedirc/Systematics/test_mesmer_MuE_nev_25000000_thickness_0.04335_LowLumi_0_divSigma_4.root";
+	"/user/cezhang/bundle/MUonE/cedirc/Systematics/test_mesmer_MuE_nev_25000000_thickness_0.04293775_LowLumi_0_divSigma_4.root";
 	TFile *infileMSUp = new TFile(dirMSUp);
 	if(infileMSUp->IsOpen()) cout<<"input file MSUP opened successfully"<<endl;
 	else { cout<<"where is the input file?"<<endl; return ; }
 
 	//******************   CHANGE dirMSDown WITH THE DIRECTORY CONTAINING YOUR TEMPLATES GENERATED WITH THE MULTIPLE SCATTERING MODELIZATION SHIFTED BY -1sigma
 	TString dirMSDown      = //mainDir + "job_xX00.04165_IntrRes0.02mrad/" + fileLocation;//templates with MS-1%
-	"/user/cezhang/bundle/MUonE/cedirc/Systematics/7Mar23_CombineThicknessScan/test_mesmer_MuE_nev_25000000_thickness_0.04165_LowLumi_0_divSigma_4.root";
+	//"/user/cezhang/bundle/MUonE/cedirc/Systematics/7Mar23_CombineThicknessScan/test_mesmer_MuE_nev_25000000_thickness_0.04165_LowLumi_0_divSigma_4.root";
+	//"/user/cezhang/bundle/MUonE/cedirc/Systematics/test_mesmer_MuE_nev_25000000_thickness_0.04165_LowLumi_0_divSigma_4.root";
+	"/user/cezhang/bundle/MUonE/cedirc/Systematics/test_mesmer_MuE_nev_25000000_thickness_0.04292075_LowLumi_0_divSigma_4.root";
 	TFile *infileMSDown = new TFile(dirMSDown);
 	if(infileMSDown->IsOpen()) cout<<"input file MSDOWN opened successfully"<<endl;
 	else { cout<<"where is the input file?"<<endl; return ; }
@@ -268,7 +275,10 @@ void HistosForCombine2D_mappedIntoTH1_FullLumi(int NTOY, TString angular_cuts) {
 			Double_t Nevents = hn_thmuVsthe_NLO_ref->GetBinContent(i+1, j+1);
 			Nevents = Nevents*scaleFactor_data;
 			if(Nevents > NentriesCut) {
-				if(NTOY < 0) {cout<<"Hi! You are not smearing the pseudodata!"<<endl; data_obs_histo->SetBinContent(counter, Nevents);}//if NTOY < 0 don't do toys
+				if(NTOY < 0) {
+					//cout<<"Hi! You are not smearing the pseudodata!"<<endl; 
+					data_obs_histo->SetBinContent(counter, Nevents);
+				}//if NTOY < 0 don't do toys
 				else data_obs_histo->SetBinContent(counter, gRandom->Gaus(Nevents, TMath::Sqrt(Nevents)));
 				data_obs_histo->SetBinError(counter, TMath::Sqrt(Nevents));
 			}
@@ -383,6 +393,7 @@ void HistosForCombine2D_mappedIntoTH1_FullLumi(int NTOY, TString angular_cuts) {
 				}
 			}
 		}
+		cout<<"iK "<<iK<<" done"<<"\r" << std::flush;
 	}
 
 
@@ -394,6 +405,7 @@ void HistosForCombine2D_mappedIntoTH1_FullLumi(int NTOY, TString angular_cuts) {
 
 
 	if(SAVE == 1) {
+
 		cout<<"Saving root file for the datacard with systematics..."<<endl;
 		cout<<"data_obs->Integral = "<<data_obs_histo->Integral()<<endl;
 
@@ -408,7 +420,7 @@ void HistosForCombine2D_mappedIntoTH1_FullLumi(int NTOY, TString angular_cuts) {
 		for(int iK = 0; iK < ngrid; iK++) {	
 			for(int iM = 0; iM < ngrid; iM++) {
 				int index = ngrid*iK + iM;
-				cout<<"muemue_template_K"<<iK<<"_M"<<iM<<" Integral = "<<htempl[index]->Integral()<<endl;
+				cout<<"muemue_template_K"<<iK<<"_M"<<iM<<" Integral = "<<htempl[index]->Integral()<<"\r" << std::flush;//endl;
 				htempl[index]->Write(Form("muemue_template_K%i_M%i", iK, iM), TObject::kOverwrite);
 			}
 		}

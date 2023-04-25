@@ -101,6 +101,7 @@ void HistosForCombine2D_mappedIntoTH1(int NTOY, TString angular_cuts) {
 	
 	//set the requested luminosity (3 weeks test run: 5pb-1 = 5e6 ub-1)
 	Double_t TRLumi = 5e6;//ub-1
+	//0.5e6 nb-1 = 0.5e6*1e3 ub-1 = 5e8
 
 
 

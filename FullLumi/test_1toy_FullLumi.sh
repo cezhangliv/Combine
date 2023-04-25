@@ -24,6 +24,7 @@ FINAL_DIR=/user/cezhang/bundle/MUonE/cedirc/Systematics/
 #list of nuisance parameters (see the datacard for the names)
 #NUISANCE_PARS="provalnN_error,MultipleScattering,SingleHitRes,Ebeam"
 NUISANCE_PARS="provalnN_error,MultipleScattering"
+#NUISANCE_PARS="provalnN_error"
 
 
 #echo "Setting the CMSSW environment..."
@@ -55,13 +56,17 @@ do
 	root -l -b -q HistosForCombine2D_mappedIntoTH1_FullLumi.C'('${NTOY}', "'${CUTS}'")'
 
 	#2) make the fit with combine for this toy
+
 	echo "Submitting jobs to make template fits with combine..."
+	
 	for (( iK=0; iK<=$NTEMPLATES; iK++ ))
 	do
 		for (( iM=0; iM<=$NTEMPLATES; iM++ ))
 		do
+			
 			echo "iK = $iK, iM = $iM"
 
+			
 			#perform the fit with combine
 			combine -M MultiDimFit --datacard $DATACARD -v 1 --text2workspace --X-allow-no-background -n ${CUTS}_iK${iK}_iM${iM}_TOY${NTOY} --saveNLL --keyword-value CUTS=${CUTS} --keyword-value iK=$iK --keyword-value iM=$iM --keyword-value NTOY=$NTOY --stepSize 0.00001 --cminDefaultMinimizerStrategy=0 --X-rtd REMOVE_CONSTANT_ZERO_POINT=1 --rMin 1 --rMax 1 --robustHesse=1 --saveFitResult --trackParameters $NUISANCE_PARS --trackErrors $NUISANCE_PARS 2> stderr_${CUTS}.txt 
 
@@ -73,17 +78,19 @@ do
 			mv robustHesse${CUTS}_iK${iK}_iM${iM}_TOY${NTOY}.root ./HesseMatrix
 			#remove the additional output file created by combine
 			rm multidimfit${CUTS}_iK${iK}_iM${iM}_TOY${NTOY}.root
+			
 		done
 	done
 
 	rm stderr_${CUTS}.txt
 
 
+
 	#3) interpolate to calculate the best fit value of K and the nuisance parameters. Calculate the errors including the covariance matrix
+	
 	root -l -b -q getFitParameters_FullLumi.C'('${NTOY}', "'${CUTS}'")'
-
 	rm toy_data_${NTOY}.root
-
+	
 done
 
 

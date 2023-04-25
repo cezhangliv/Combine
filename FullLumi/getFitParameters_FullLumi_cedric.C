@@ -355,14 +355,14 @@ void getFitParameters_FullLumi(int NTOY= 1, TString cuts = "thmu0.2_the32") {
 	SIGMA[0][0] = DKBest; SIGMA[0][1] = 0;
 	SIGMA[1][0] = 0;      SIGMA[1][1] = DMBest;
 
-	TMatrixD P(hCovMatrix->GetNbinsX(), 2);
+	TMatrixD P(hCovMatrix->GetNbinsX(), 1);
 	//sigmaK
 	P[0][0] = - (NormNuisance_1sigma_K - NormNuisance);
-	P[1][0] = - (MultipleScatteringNuisance_1sigma_K - MultipleScatteringNuisance);
+	//P[1][0] = - (MultipleScatteringNuisance_1sigma_K - MultipleScatteringNuisance);
 //	P[2][0] = - (SingleHitResNuisance_1sigma_K - SingleHitResNuisance);
 	//sigmaM
 	P[0][1] = - (NormNuisance_1sigma_M - NormNuisance);
-	P[1][1] = - (MultipleScatteringNuisance_1sigma_M - MultipleScatteringNuisance);
+	//P[1][1] = - (MultipleScatteringNuisance_1sigma_M - MultipleScatteringNuisance);
 //	P[2][1] = - (SingleHitResNuisance_1sigma_M - SingleHitResNuisance);
 
         //Step 1: find B
@@ -567,9 +567,6 @@ void getResults(int NTOY, TString cuts, Double_t *Kbest_fit, Double_t *DKbest_fi
 					Float_t MS_error;
 					results_tree->SetBranchAddress("trackedParam_MultipleScattering", &MS);
 					results_tree->SetBranchAddress("trackedError_MultipleScattering", &MS_error);
-                                        //cedric test
-                                        MS = 0;
-                                        MS_error = 0;                                        
 
 					results_tree->GetEntry(0);
 
@@ -621,9 +618,7 @@ void getResults(int NTOY, TString cuts, Double_t *Kbest_fit, Double_t *DKbest_fi
 				++it;
 			}
 		}
-	} // K - M loop, NormNuisance, MSNuisance as a function of M, in totoal the number is ik (plots) (So for each K value, there is a plot of showing para as a function of M).
-
-        // Below: M loop, NormNuisance, MSNuisance as a function of K
+	}
 
 
 	for(int iM = 0; iM < ngrid; iM++) {
@@ -649,9 +644,6 @@ void getResults(int NTOY, TString cuts, Double_t *Kbest_fit, Double_t *DKbest_fi
 					Float_t MS_error;
 					results_tree->SetBranchAddress("trackedParam_MultipleScattering", &MS);
 					results_tree->SetBranchAddress("trackedError_MultipleScattering", &MS_error);
-                                        // cedric test
-                                        MS = 0;
-                                        MS_error = 0;
 
 					results_tree->GetEntry(0);
 
@@ -671,7 +663,7 @@ void getResults(int NTOY, TString cuts, Double_t *Kbest_fit, Double_t *DKbest_fi
 		MSNuisanceK[iM]->Draw("APE");
 	}
 
-        // Then starting fitting
+
 
 	nLL_min0 = nLL_min0/ngrid;
 
